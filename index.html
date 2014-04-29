@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>MySchoolPal Dashboard</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery.jqplot.min.js"></script>
+<script language="javascript" type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/plugins/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript" src="js/plugins/jqplot.donutRenderer.min.js"></script>
+<script type="text/javascript" src="js/plugins/jqplot.barRenderer.min.js"></script>
+<script type="text/javascript" src="js/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="js/plugins/jqplot.pointLabels.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/jquery.jqplot.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css" />
+</head>
+<body >
+
+    <form class="form-horizontal well">
+		<div class="row">
+			<div class="col-md-4">
+				<strong><h1>MYSCHOOLPAL</h1></strong>
+				<input type="file" id="csvFileInput" style="margin-top:30px;" onchange="handleFiles(this.files)" accept=".csv">
+			</div>
+			
+			<div class="col-md-2 text-center">
+				<button class="button_link" data-toggle="modal" data-target="#tmModal">
+				<strong>Transition Matrices</strong>
+				<img src="img/tm.png" class="img_link img-rounded"></img>
+				</button>
+			</div>
+			<div class="col-md-2 text-center">
+				<button class="button_link" data-toggle="modal" data-target="#barChartModal">
+				<strong>Class Progress</strong>
+				<img src="img/class_progress.png" class="img_link img-rounded"></img>
+				</button>
+			</div>
+			<div class="col-md-2 text-center">
+			<button class="button_link" data-toggle="modal" data-target="#lpModal">
+			<strong>Levels of Progress</strong>
+				<img src="img/levels_progress.png" class="img_link img-rounded"></img>
+			</button>
+			</div>
+			<div class="col-md-2 text-center">
+				<button class="button_link" data-toggle="modal" data-target="#targetModal">
+					<strong>Progress Target</strong>
+					<img src="img/target_progress.png" class="img_link img-rounded"></img>
+				</button>
+			</div>
+        </div>
+      
+    </form>
+	<div class="container">
+		<div id="output">		
+			<div class="row">
+				<div class="col-md-12">
+				<h2>Dashboard Service</h2>
+				<br />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<h5>MySchoolPal's Dashboard service provides all teachers with an extremely quick and simple method of analysing data.
+					<br />
+					<br />
+					This suite provides teachers with the opportunity to immediately analyse the amount of progress each pupil is making.</h5>	
+				</div>
+				<div class="col-md-8">
+					<h5>
+						The format for the data sheet is very simple, use the example below to create your own:
+						<br />
+						<br />
+						<table class="table table-bordered">
+							<tr>
+								<th>
+									Surname
+								</th>
+								<th>
+									Forename
+								</th>
+								<th>
+									Target
+								</th>
+								<th>
+									Comparison
+								</th>
+								<th>
+									Result
+								</th>
+								<th>
+									Group 1
+								</th>
+								<th>
+									Group 2
+								</th>
+								<th>
+									Group 3
+								</th>
+							</tr>
+							<tr>
+								<td>
+									David
+								</td>
+								<td>
+									Holmes
+								</td>
+								<td>
+									4C
+								</td>
+								<td>
+									2C
+								</td>
+								<td>
+									3A
+								</td>
+								<td>
+									
+								</td>
+								<td>
+									Y
+								</td>
+								<td>
+									
+								</td>
+							</tr>
+						</table>
+						<br />
+						Click <a href="example.csv">here </a> to open an example sheet to give a more detailed example.
+					</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade"  id="tmModal" tabindex="-1" role="dialog" aria-labelledby="tmModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width:90%">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Transition Matrix</h4>
+				</div>
+				<div class="modal-body">
+					<div id = "tm_1_2"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	
+	<div class="modal fade"  id="barChartModal" tabindex="-1" role="dialog" aria-labelledby="tmModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width:90%">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Comparison - Target - Result</h4>
+				</div>
+				<div class="modal-body">
+					<div id="barChart_target" style="height:300px;width:100%; "></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<div class="modal fade"  id="lpModal" tabindex="-1" role="dialog" aria-labelledby="tmModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Levels of Progress</h4>
+				</div>
+				<div class="modal-body">
+					
+					<div id="pie_chart" style="height:300px;width:400px; margin-right:auto; margin-left:auto;"></div>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<div class="modal fade"  id="targetModal" tabindex="-1" role="dialog" aria-labelledby="tmModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Comparison to Target</h4>
+				</div>
+				<div class="modal-body">
+					<div id="pie_chart_target" style="height:300px;width:400px;  margin-right:auto; margin-left:auto;"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+  </div>
+  
+  
+
+
+  <br>
+  <br>
+  <footer>
+    <center>
+      
+    </center>
+  </footer>
+
+  <script type="text/javascript" src="js/read-csv.js"></script>
+  <script>
+
+</script>
+</body>
+</html>
+<script>
+
+
+
+</script>

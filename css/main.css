@@ -1,0 +1,57 @@
+<style>
+b {
+
+}
+
+img.img_link {
+margin-top:10px;
+
+height:70px;
+}
+
+button.button_link {
+border: 0px;
+background: none;
+padding:10px;
+}
+
+button.button_link:hover {
+border: 1px solid #000;
+border-radius:10px;
+padding:10px;
+}
+
+table.tm_layout {
+border:2px solid black;
+border-collapse:collapse;
+width:100%;
+}
+
+td.tm_layout {
+width:5%;
+height:30px;
+text-align:center;
+border:2px solid black;
+}
+
+input.tm_button {
+border: 0px;
+background: none;
+}
+
+.above_target {
+background-color:#428bca;
+
+}
+.on_target {
+background-color:#5cb85c;
+
+}
+.one_below_target{
+background-color:#f0ad4e;
+
+}
+.below_target {
+background-color:#d9534f;
+}
+</style>
